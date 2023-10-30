@@ -1,0 +1,38 @@
+h1 {
+  font-family: 'Righteous', sans-serif;
+  color:salmon;
+  background-color: black;
+  text-align: center;
+  font-size: 2em;
+  font-style:italic;
+  padding: 1em;
+}
+
+nav{
+  color:black;
+  background-color: salmon;
+  border: 25px;
+}
+
+.inline-paragraph {
+  display:inline;
+  padding: 1em;
+}
+
+.centered-image {
+  text-align: center;
+}
+.centered-image img {
+  max-width: 100%;
+  display: inline-block; /* Prevent extra spacing */
+}
+
+main p {
+  font-family: 'Righteous', sans-serif;
+  font-size: 1.5em;
+}
+
+main ul li {
+  font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  margin-left: 25px;
+}
