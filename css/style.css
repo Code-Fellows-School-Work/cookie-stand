@@ -14,6 +14,11 @@ nav {
   border: 25px;
 }
 
+header nav li {
+  display:inline-block;
+  margin-left: 50px;
+}
+
 .inline-paragraph {
   display: inline;
   padding: 1em;
