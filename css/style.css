@@ -60,3 +60,8 @@ section #results-city1 {
 main h2 {
   margin-left: 50px;
 }
+
+table * {
+  border: 1px solid;
+  padding: .5em;
+}

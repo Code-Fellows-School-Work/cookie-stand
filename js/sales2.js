@@ -1,26 +1,30 @@
+'use strict';
 // could have used this instead for the times:
 // let hours = ['6am', '7am', '8am'];
 // it's important to change hours and estimates into arrays so that they're the same length
 // can also put stores in array
 
 let hours = ['6am', '7am', '8am', '9am', '10am', '11am', '12am', '1pm', '2pm', '3pm', '4pm', '5pm', '6pm', '7pm', '8pm'];
+let hourlyTotal = [];
+let allLocationsTotal = 0;
 
-// constructor with the parameters and id = id of results element i.e. results-city1
-function City(name, minCustomer, maxCustomer, avgCookie, id) {
-  this.name = name;
+// constructor with the parameters and id = id of results element i.e. results-Store1
+function Store(location, minCustomer, maxCustomer, avgCookie) {
+  this.location = location;
   this.minimumCustomer = minCustomer;
   this.maximumCustomer = maxCustomer;
   this.averageCookie = avgCookie;
-  this.id = id;
+  this.hourlySalesArray = [];
+  this.dailySalesTotal = 0;
 }
 
-City.prototype.randomCustomer = function getRandomInt(min, max) {
+Store.prototype.randomCustomer = function getRandomInt(min, max) {
   min = Math.ceil(min);
   max = Math.floor(max);
   return Math.floor(Math.random() * (max - min) + min);
 };
 
-City.prototype.hourlyEarnings = function earning() {
+Store.prototype.hourlyEarnings = function earning() {
   const theResults = document.getElementById(this.id);
   let totalCookies = 0;
   for (let i = 0; i < hours.length; i++) {
@@ -29,9 +33,9 @@ City.prototype.hourlyEarnings = function earning() {
 
     const time = hours[i];
     const hourlyResults = `${time}: ${earnings.toFixed(0)} cookies`;
-    const resultsParagraph = document.createElement('p');
-    resultsParagraph.textContent = hourlyResults;
-    theResults.appendChild(resultsParagraph);
+    const income = document.createElement('td');
+    income.textContent = hourlyResults;
+    theResults.appendChild(income);
 
     totalCookies += earnings;
   }
@@ -41,21 +45,41 @@ City.prototype.hourlyEarnings = function earning() {
 };
 
 // create new cities following format of constructor
-const city1 = new City('Seattle', 23, 65, 6.3, 'resultsCity1');
-const city2 = new City('Tokyo', 3, 24, 1.2, 'resultsCity2');
-const city3 = new City('Dubai', 11, 38, 3.7, 'resultsCity3');
-const city4 = new City('Paris', 20, 38, 2.3, 'resultsCity4');
-const city5 = new City('Paris', 2, 16, 4.6, 'resultsCity5');
+const Store1 = new Store('Seattle', 23, 65, 6.3);
+const Store2 = new Store('Tokyo', 3, 24, 1.2);
+const Store3 = new Store('Dubai', 11, 38, 3.7);
+const Store4 = new Store('Paris', 20, 38, 2.3);
+const Store5 = new Store('Paris', 2, 16, 4.6);
 
-// invoking each city hourly earning
-city1.hourlyEarnings();
-city2.hourlyEarnings();
-city3.hourlyEarnings();
-city4.hourlyEarnings();
-city5.hourlyEarnings();
+// invoking each Store hourly earning
+Store1.hourlyEarnings();
+Store2.hourlyEarnings();
+Store3.hourlyEarnings();
+Store4.hourlyEarnings();
+Store5.hourlyEarnings();
 
-// let city1 = {
-//   name: 'Seattle',
+Store.prototype.render = function () {
+  let table = document.getElementById('income');
+  let StoreRow = document.createElement('tr');
+  table.appendChild(StoreRow);
+
+  let locationCell = document.createElement('td');
+  locationCell.textContent = this.location;
+  StoreRow.appendChild(locationCell);
+
+  for (let i = 0; i < hours.length; i++) {
+    let cell = document.createElement('td');
+    const randomCustomers = this.randomCustomer(this.minimumCustomer, this.maximumCustomer);
+    const earnings = randomCustomers * this.averageCookie;
+    cell.textContent = `${hours[i]}: ${earnings.toFixed(0)} cookies`;
+    StoreRow.appendChild(cell);
+  }
+};
+
+
+
+// let Store1 = {
+//   location: 'Seattle',
 //   minimumCustomer: 23,
 //   maximumCustomer: 65,
 //   averageCookie: 6.3,
@@ -65,7 +89,7 @@ city5.hourlyEarnings();
 //     return Math.floor(Math.random() * (max - min) + min);
 //   },
 //   hourlyEarnings: function earning() {
-//     const theResults = document.getElementById('resultsCity1');
+//     const theResults = document.getElementById('resultsStore1');
 //     let totalCookies = 0;
 //     for (let i = 0; i < hours.length; i++) {
 //       const randomCustomers = this.randomCustomer(this.minimumCustomer, this.maximumCustomer);
@@ -85,10 +109,10 @@ city5.hourlyEarnings();
 //   }
 // };
 
-// city1.hourlyEarnings();
+// Store1.hourlyEarnings();
 
-// let city2 = {
-//   name: 'Tokyo',
+// let Store2 = {
+//   location: 'Tokyo',
 //   minimumCustomer: 3,
 //   maximumCustomer: 24,
 //   averageCookie: 1.2,
@@ -98,7 +122,7 @@ city5.hourlyEarnings();
 //     return Math.floor(Math.random() * (max - min) + min);
 //   },
 //   hourlyEarnings: function earning() {
-//     const theResults = document.getElementById('resultsCity2');
+//     const theResults = document.getElementById('resultsStore2');
 //     let totalCookies = 0;
 //     for (let i = 0; i < hours.length; i++) {
 //       const randomCustomers = this.randomCustomer(this.minimumCustomer, this.maximumCustomer);
@@ -118,10 +142,10 @@ city5.hourlyEarnings();
 //   }
 // };
 
-// city2.hourlyEarnings();
+// Store2.hourlyEarnings();
 
-// let city3 = {
-//   name: 'Dubai',
+// let Store3 = {
+//   location: 'Dubai',
 //   minimumCustomer: 11,
 //   maximumCustomer: 38,
 //   averageCookie: 3.7,
@@ -131,7 +155,7 @@ city5.hourlyEarnings();
 //     return Math.floor(Math.random() * (max - min) + min);
 //   },
 //   hourlyEarnings: function earning() {
-//     const theResults = document.getElementById('resultsCity3');
+//     const theResults = document.getElementById('resultsStore3');
 //     let totalCookies = 0;
 //     for (let i = 0; i < hours.length; i++) {
 //       const randomCustomers = this.randomCustomer(this.minimumCustomer, this.maximumCustomer);
@@ -151,10 +175,10 @@ city5.hourlyEarnings();
 //   }
 // };
 
-// city3.hourlyEarnings();
+// Store3.hourlyEarnings();
 
-// let city4 = {
-//   name: 'Paris',
+// let Store4 = {
+//   location: 'Paris',
 //   minimumCustomer: 20,
 //   maximumCustomer: 38,
 //   averageCookie: 2.3,
@@ -164,7 +188,7 @@ city5.hourlyEarnings();
 //     return Math.floor(Math.random() * (max - min) + min);
 //   },
 //   hourlyEarnings: function earning() {
-//     const theResults = document.getElementById('resultsCity4');
+//     const theResults = document.getElementById('resultsStore4');
 //     let totalCookies = 0;
 //     for (let i = 0; i < hours.length; i++) {
 //       const randomCustomers = this.randomCustomer(this.minimumCustomer, this.maximumCustomer);
@@ -184,10 +208,10 @@ city5.hourlyEarnings();
 //   }
 // };
 
-// city4.hourlyEarnings();
+// Store4.hourlyEarnings();
 
-// let city5 = {
-//   name: 'Lima',
+// let Store5 = {
+//   location: 'Lima',
 //   minimumCustomer: 20,
 //   maximumCustomer: 38,
 //   averageCookie: 2.3,
@@ -197,7 +221,7 @@ city5.hourlyEarnings();
 //     return Math.floor(Math.random() * (max - min) + min);
 //   },
 //   hourlyEarnings: function earning() {
-//     const theResults = document.getElementById('resultsCity5');
+//     const theResults = document.getElementById('resultsStore5');
 //     let totalCookies = 0;
 //     for (let i = 0; i < hours.length; i++) {
 //       const randomCustomers = this.randomCustomer(this.minimumCustomer, this.maximumCustomer);
@@ -217,4 +241,4 @@ city5.hourlyEarnings();
 //   }
 // };
 
-// city5.hourlyEarnings();
+// Store5.hourlyEarnings();
