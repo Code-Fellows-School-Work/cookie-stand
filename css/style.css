@@ -37,12 +37,16 @@ main ul li {
   margin-left: 25px;
 }
 
-#locations {
-  font-family: 'Times New Roman', Times, serif;
+#city-name {
+  font-family: 'Righteous', sans-serif;
 }
 
 footer {
   background-color: gray;
   text-align: center;
   padding: 1em;
+}
+
+section #results-city1 {
+  margin-left: 20px;
 }
