@@ -9,19 +9,24 @@ let city1 = {
     return Math.floor(Math.random() * (max - min) + min);
   },
   hourlyEarnings: function earning() {
+    const theResults = document.getElementById('results');
     for (let i = 8; i <= 19; i++) {
       const randomCustomers = this.randomCustomer(this.miniumCustomer, this.maximumCustomer);
       const earnings = randomCustomers * this.averageCookie;
-      console.log(earnings);
+      const hourlyResults = `Hour ${i}: ${earnings.toFixed(2)}`;
+      const resultsParagraph = document.createElement('p');
+      resultsParagraph.textContent = hourlyResults;
+      theResults.appendChild(resultsParagraph);
     }
   }
 };
 
-const theResults = document.getElementById('results');
-// peopleSection.addTextNode('John');
-const firstChild = document.createElement('h2');
-firstChild.textContent = city1.averageCookie;
-theResults.appendChild(firstChild);
+
+// const theResults = document.getElementById('results');
+// // peopleSection.addTextNode('John');
+// const firstChild = document.createElement('h2');
+// firstChild.textContent = city1.hourlyEarnings;
+// theResults.appendChild(firstChild);
 
 // let city2 = {
 //   name: 'Tokyo',
