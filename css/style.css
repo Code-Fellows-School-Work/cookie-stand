@@ -35,7 +35,7 @@ nav {
 
 main ul li {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  margin-left: 25px;
+  margin-left: 75px;
 }
 
 #city-name {
@@ -50,4 +50,8 @@ footer {
 
 section #results-city1 {
   margin-left: 20px;
+}
+
+main h2 {
+  margin-left: 50px;
 }

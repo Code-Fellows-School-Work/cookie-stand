@@ -1,3 +1,8 @@
+// could have used this instead for the times:
+// let hours = ['6am', '7am', '8am'];
+// it's important to change hours and estimates into arrays so that they're the same length
+// can also put stores in array 
+
 let city1 = {
   name: 'Seattle',
   miniumCustomer: 23,
