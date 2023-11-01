@@ -49,16 +49,16 @@ Store.prototype.hourlyEarnings = function earning() {
 };
 
 // this code appends hours as the last row
-let hoursTable = document.createElement('table-header');
-let hoursRow = document.createElement('tr');
+// let hoursTable = document.createElement('table-header');
+// let hoursRow = document.createElement('tr');
 
-for (let i = 0; i < hours.length; i++) {
-  let hoursData = document.createElement('td');
-  hoursData.textContent = hours[i];
-  hoursRow.appendChild(hoursData);
-}
-hoursTable.appendChild(hoursRow);
-document.body.appendChild(hoursTable);
+// for (let i = 0; i < hours.length; i++) {
+//   let hoursData = document.createElement('td');
+//   hoursData.textContent = hours[i];
+//   hoursRow.appendChild(hoursData);
+// }
+// hoursTable.appendChild(hoursRow);
+// document.body.appendChild(hoursTable);
 
 // same code as above but changed line 64 to .getElementById - deletes entire table
 // let hoursTable = document.getElementById('table-header');
@@ -82,11 +82,11 @@ Store.prototype.render = function () {
   StoreRow.appendChild(locationCell);
 
 // this code puts times within the table
-  // for (let i = 0; i < hours.length; i++) {
-  //   let hoursCell = document.createElement('th');
-  //   hoursCell.textContent = hours[i];
-  //   StoreRow.appendChild(hoursCell);
-  // }
+//   for (let i = 0; i < hours.length; i++) {
+//     let hoursCell = document.createElement('th');
+//     hoursCell.textContent = hours[i];
+//     StoreRow.appendChild(hoursCell);
+//   }
 
   for (let i = 0; i < hours.length; i++) {
     let cell = document.createElement('td');
