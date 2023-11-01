@@ -8,7 +8,7 @@ let hours = ['6am', '7am', '8am', '9am', '10am', '11am', '12am', '1pm', '2pm', '
 let hourlyTotal = [];
 let allLocationsTotal = 0;
 
-// constructor with the parameters and id = id of results element i.e. results-Store1
+// constructor created for each store
 function Store(location, minCustomer, maxCustomer, avgCookie) {
   this.location = location;
   this.minimumCustomer = minCustomer;
@@ -16,7 +16,7 @@ function Store(location, minCustomer, maxCustomer, avgCookie) {
   this.averageCookie = avgCookie;
   this.hourlySalesArray = [];
   this.dailySalesTotal = 0;
-}
+};
 
 Store.prototype.randomCustomer = function getRandomInt(min, max) {
   min = Math.ceil(min);
@@ -39,24 +39,11 @@ Store.prototype.hourlyEarnings = function earning() {
 
     totalCookies += earnings;
   }
-  const totalRow = document.createElement('p');
+  const totalRow = document.createElement('td');
   totalRow.textContent = `Total: ${totalCookies.toFixed(0)} cookies`;
   theResults.appendChild(totalRow);
 };
 
-// create new cities following format of constructor
-const Store1 = new Store('Seattle', 23, 65, 6.3);
-const Store2 = new Store('Tokyo', 3, 24, 1.2);
-const Store3 = new Store('Dubai', 11, 38, 3.7);
-const Store4 = new Store('Paris', 20, 38, 2.3);
-const Store5 = new Store('Paris', 2, 16, 4.6);
-
-// invoking each Store hourly earning
-Store1.hourlyEarnings();
-Store2.hourlyEarnings();
-Store3.hourlyEarnings();
-Store4.hourlyEarnings();
-Store5.hourlyEarnings();
 
 Store.prototype.render = function () {
   let table = document.getElementById('income');
@@ -76,7 +63,17 @@ Store.prototype.render = function () {
   }
 };
 
+// create new cities following format of constructor
+const store1 = new Store('Seattle', 23, 65, 6.3);
+const store2 = new Store('Tokyo', 3, 24, 1.2);
+const store3 = new Store('Dubai', 11, 38, 3.7);
+const store4 = new Store('Paris', 20, 38, 2.3);
+const store5 = new Store('Paris', 2, 16, 4.6);
 
+const allLocations = [store1, store2, store3, store4, store5];
+
+// invoking each Store hourly earning
+store1.render();
 
 // let Store1 = {
 //   location: 'Seattle',
