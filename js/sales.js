@@ -45,7 +45,7 @@ const city1 = new City('Seattle', 23, 65, 6.3, 'resultsCity1');
 const city2 = new City('Tokyo', 3, 24, 1.2, 'resultsCity2');
 const city3 = new City('Dubai', 11, 38, 3.7, 'resultsCity3');
 const city4 = new City('Paris', 20, 38, 2.3, 'resultsCity4');
-const city5 = new City('Paris', 2, 16, 4.6, 'resultsCity5');
+const city5 = new City('Lima', 2, 16, 4.6, 'resultsCity5');
 
 // invoking each city hourly earning
 city1.hourlyEarnings();
