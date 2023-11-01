@@ -112,3 +112,4 @@ store3.render();
 store4.render();
 store5.render();
 
+// got the idea from code review to add manual times in html file
