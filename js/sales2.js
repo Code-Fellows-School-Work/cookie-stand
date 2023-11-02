@@ -96,4 +96,18 @@ function getTotalHourSales() {
 
 getTotalHourSales();
 
-
+let totalsOfAllEl = document.getElementById('everyLocationTotal');
+let totalsRowsEl = document.createElement('tr');
+let totalsDataEl = document.createElement('th');
+totalsDataEl.textContent = 'Total';
+totalsRowsEl.append(totalsDataEl);
+totalsOfAllEl.append(totalsRowsEl);
+for (let i = 0; i <hours.length; i++) {
+  let totalHourlyData = document.createElement('td');
+  totalHourlyData.textContent = totalForEachHour[i];
+  totalsRowsEl.append(totalHourlyData);
+}
+let grandTotal = document.createElement('td');
+grandTotal.textContent = Math.round(totalOfAllLocations); // Use Math.round() for the grand total
+totalsRowsEl.appendChild(grandTotal);
+totalsOfAllEl.appendChild(totalsRowsEl);
