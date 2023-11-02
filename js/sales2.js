@@ -1,6 +1,6 @@
 'use strict';
 
-let hours = ['6am', '7am', '8am', '9am', '10am', '11am', '12am', '1pm', '2pm', '3pm', '4pm', '5pm', '6pm', '7pm', 'Daily Location Total'];
+let hours = ['6am', '7am', '8am', '9am', '10am', '11am', '12am', '1pm', '2pm', '3pm', '4pm', '5pm', '6pm', '7pm', 'Location Total'];
 let totalForEachHour = [];
 let totalOfAllLocations = 0;
 
@@ -35,13 +35,14 @@ Store.prototype.hourlyEarnings = function earning() {
     theResults.appendChild(income);
 
     this.hourlySalesArray.push(earnings); // Add earnings to the hourlySalesArray
-    this.dailySalesTotal += earnings;
     totalCookies += earnings;
   }
+  // Add the "Total" cell only once, at the end of the loop
   let totalRow = document.createElement('td');
   totalRow.textContent = `Total: ${totalCookies.toFixed(0)} cookies`;
   theResults.appendChild(totalRow);
 };
+
 
 Store.prototype.render = function () {
   let table = document.getElementById('income');
@@ -79,7 +80,7 @@ store4.render();
 store5.render();
 
 
-function getTotalHourSales() {
+function totalHourSales() {
   for (let i = 0; i < hours.length; i++) {
     let hourTotal = 0;
     for (let j = 0; j < allLocations.length; j++) {
@@ -90,12 +91,12 @@ function getTotalHourSales() {
   }
 }
 
-getTotalHourSales();
+totalHourSales();
 
 let totalsOfAllCell = document.getElementById('everyLocationTotal');
 let totalsRowsCell = document.createElement('tr');
 let totalsDataCell = document.createElement('th');
-totalsDataCell.textContent = 'Total';
+totalsDataCell.textContent = 'Hourly Total For All Locations';
 totalsRowsCell.append(totalsDataCell);
 totalsOfAllCell.append(totalsRowsCell);
 for (let i = 0; i <hours.length; i++) {
@@ -109,7 +110,7 @@ totalsRowsCell.appendChild(grandTotal);
 totalsOfAllCell.appendChild(totalsRowsCell);
 
 
-function appendTotalCookiesPerLocation(locations) {
+function totalCookiesPerLocation(locations) {
   let table = document.getElementById('income');
 
   for (let i = 0; i < locations.length; i++) {
@@ -127,6 +128,27 @@ function appendTotalCookiesPerLocation(locations) {
   }
 }
 
-// Call the function with your array of store locations
-appendTotalCookiesPerLocation(allLocations);
+totalCookiesPerLocation(allLocations);
+
+// function hoursToTable() {
+//   let table = document.getElementById('hours-header');
+//   let headerRow = document.createElement('tr');
+
+//   // Create the "Locations" cell
+//   let locationsCell = document.createElement('th');
+//   locationsCell.textContent = 'Locations';
+//   headerRow.appendChild(locationsCell);
+
+//   for (let i = 0; i < hours.length; i++) {
+//     let headerCell = document.createElement('th');
+//     headerCell.textContent = hours[i];
+//     headerRow.appendChild(headerCell);
+//   }
+
+//   table.appendChild(headerRow);
+// }
+
+// hoursToTable();
+
+
 
