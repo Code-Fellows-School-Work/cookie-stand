@@ -1,220 +1,135 @@
-// could have used this instead for the times:
-// let hours = ['6am', '7am', '8am'];
-// it's important to change hours and estimates into arrays so that they're the same length
-// can also put stores in array
+'use strict';
 
-let hours = ['6am', '7am', '8am', '9am', '10am', '11am', '12am', '1pm', '2pm', '3pm', '4pm', '5pm', '6pm', '7pm', '8pm'];
+let hours = ['6am', '7am', '8am', '9am', '10am', '11am', '12am', '1pm', '2pm', '3pm', '4pm', '5pm', '6pm', '7pm', 'Location Total'];
+let totalForEachHour = [];
+let totalOfAllLocations = 0;
 
-// constructor with the parameters and id = id of results element i.e. results-city1
-function City(name, minCustomer, maxCustomer, avgCookie, id) {
-  this.name = name;
+// constructor created for each store
+function Store(location, minCustomer, maxCustomer, avgCookie) {
+  this.location = location;
   this.minimumCustomer = minCustomer;
   this.maximumCustomer = maxCustomer;
   this.averageCookie = avgCookie;
-  this.id = id;
+  this.hourlySalesArray = [];
+  this.dailySalesTotal = 0;
 }
 
-City.prototype.randomCustomer = function getRandomInt(min, max) {
+Store.prototype.randomCustomer = function getRandomInt(min, max) {
   min = Math.ceil(min);
   max = Math.floor(max);
   return Math.floor(Math.random() * (max - min) + min);
 };
 
-City.prototype.hourlyEarnings = function earning() {
-  const theResults = document.getElementById(this.id);
+Store.prototype.hourlyEarnings = function earning() {
+  let theResults = document.getElementById(this.id); //
   let totalCookies = 0;
+
   for (let i = 0; i < hours.length; i++) {
-    const randomCustomers = this.randomCustomer(this.minimumCustomer, this.maximumCustomer);
-    const earnings = randomCustomers * this.averageCookie;
+    let randomCustomers = this.randomCustomer(this.minimumCustomer, this.maximumCustomer);
+    let earnings = randomCustomers * this.averageCookie;
 
-    const time = hours[i];
-    const hourlyResults = `${time}: ${earnings.toFixed(0)} cookies`;
-    const resultsParagraph = document.createElement('p');
-    resultsParagraph.textContent = hourlyResults;
-    theResults.appendChild(resultsParagraph);
+    let time = hours[i];
+    let hourlyResults = `${time}: ${earnings.toFixed(0)} cookies`;
+    let income = document.createElement('td');
+    income.textContent = hourlyResults;
+    theResults.appendChild(income);
 
+    this.hourlySalesArray.push(earnings);
     totalCookies += earnings;
   }
-  const totalRow = document.createElement('p');
+  let totalRow = document.createElement('td');
   totalRow.textContent = `Total: ${totalCookies.toFixed(0)} cookies`;
   theResults.appendChild(totalRow);
 };
 
+
+Store.prototype.render = function () {
+  let table = document.getElementById('income');
+  let StoreRow = document.createElement('tr');
+  table.appendChild(StoreRow);
+
+  let locationCell = document.createElement('td');
+  locationCell.textContent = this.location;
+  StoreRow.appendChild(locationCell);
+
+  for (let i = 0; i < hours.length; i++) {
+    let cell = document.createElement('td');
+    let randomCustomers = this.randomCustomer(this.minimumCustomer, this.maximumCustomer);
+    let earnings = randomCustomers * this.averageCookie;
+    cell.textContent = `${earnings.toFixed(0)} cookies`;
+    StoreRow.appendChild(cell);
+    this.hourlySalesArray.push(earnings); // Add earnings to the hourlySalesArray
+  }
+};
+
 // create new cities following format of constructor
-const city1 = new City('Seattle', 23, 65, 6.3, 'resultsCity1');
-const city2 = new City('Tokyo', 3, 24, 1.2, 'resultsCity2');
-const city3 = new City('Dubai', 11, 38, 3.7, 'resultsCity3');
-const city4 = new City('Paris', 20, 38, 2.3, 'resultsCity4');
-const city5 = new City('Lima', 2, 16, 4.6, 'resultsCity5');
+let store1 = new Store('Seattle', 23, 65, 6.3);
+let store2 = new Store('Tokyo', 3, 24, 1.2);
+let store3 = new Store('Dubai', 11, 38, 3.7);
+let store4 = new Store('Paris', 20, 38, 2.3);
+let store5 = new Store('Lima', 2, 16, 4.6);
 
-// invoking each city hourly earning
-city1.hourlyEarnings();
-city2.hourlyEarnings();
-city3.hourlyEarnings();
-city4.hourlyEarnings();
-city5.hourlyEarnings();
+// storing locations in array to potentially set up for next lab assignment
+let allLocations = [store1, store2, store3, store4, store5];
 
-// let city1 = {
-//   name: 'Seattle',
-//   minimumCustomer: 23,
-//   maximumCustomer: 65,
-//   averageCookie: 6.3,
-//   randomCustomer: function getRandomInt(min, max) {
-//     min = Math.ceil(min);
-//     max = Math.floor(max);
-//     return Math.floor(Math.random() * (max - min) + min);
-//   },
-//   hourlyEarnings: function earning() {
-//     const theResults = document.getElementById('resultsCity1');
-//     let totalCookies = 0;
-//     for (let i = 0; i < hours.length; i++) {
-//       const randomCustomers = this.randomCustomer(this.minimumCustomer, this.maximumCustomer);
-//       const earnings = randomCustomers * this.averageCookie;
+store1.render();
+store2.render();
+store3.render();
+store4.render();
+store5.render();
 
-//       const time = hours[i];
-//       const hourlyResults = `${time}: ${earnings.toFixed(0)} cookies`;
-//       const resultsParagraph = document.createElement('p');
-//       resultsParagraph.textContent = hourlyResults;
-//       theResults.appendChild(resultsParagraph);
+// total cookies per hour
+function totalHourSales() {
+  for (let i = 0; i < hours.length; i++) {
+    let hourTotal = 0;
+    for (let j = 0; j < allLocations.length; j++) {
+      hourTotal += allLocations[j].hourlySalesArray[i];
+    }
+    totalOfAllLocations += hourTotal;
+    totalForEachHour[i] = hourTotal;
+  }
+}
 
-//       totalCookies += earnings;
-//     }
-//     const totalRow = document.createElement('p');
-//     totalRow.textContent = `Total: ${totalCookies.toFixed(0)} cookies`;
-//     theResults.appendChild(totalRow);
-//   }
-// };
+totalHourSales();
 
-// city1.hourlyEarnings();
+// total cookies per location
+let totalsOfAllCell = document.getElementById('everyLocationTotal');
+let totalsRowsCell = document.createElement('tr');
+let totalsDataCell = document.createElement('th');
+totalsDataCell.textContent = 'Hourly Total For All Locations';
+totalsRowsCell.append(totalsDataCell);
+totalsOfAllCell.append(totalsRowsCell);
+for (let i = 0; i <hours.length; i++) {
+  let totalHourlyData = document.createElement('td');
+  totalHourlyData.textContent = Math.round(totalForEachHour[i]) + ' cookies';
+  totalsRowsCell.append(totalHourlyData);
+}
+let grandTotal = document.createElement('td');
+grandTotal.textContent = Math.round(totalOfAllLocations) + ' cookies';
+totalsRowsCell.appendChild(grandTotal);
+totalsOfAllCell.appendChild(totalsRowsCell);
 
-// let city2 = {
-//   name: 'Tokyo',
-//   minimumCustomer: 3,
-//   maximumCustomer: 24,
-//   averageCookie: 1.2,
-//   randomCustomer: function getRandomInt(min, max) {
-//     min = Math.ceil(min);
-//     max = Math.floor(max);
-//     return Math.floor(Math.random() * (max - min) + min);
-//   },
-//   hourlyEarnings: function earning() {
-//     const theResults = document.getElementById('resultsCity2');
-//     let totalCookies = 0;
-//     for (let i = 0; i < hours.length; i++) {
-//       const randomCustomers = this.randomCustomer(this.minimumCustomer, this.maximumCustomer);
-//       const earnings = randomCustomers * this.averageCookie;
+function totalCookiesPerLocation(locations) {
+  let table = document.getElementById('income');
 
-//       const time = hours[i];
-//       const hourlyResults = `${time}: ${earnings.toFixed(0)} cookies`;
-//       const resultsParagraph = document.createElement('p');
-//       resultsParagraph.textContent = hourlyResults;
-//       theResults.appendChild(resultsParagraph);
+  for (let i = 0; i < locations.length; i++) {
+    let location = locations[i];
+    let locationTotal = 0;
 
-//       totalCookies += earnings;
-//     }
-//     const totalRow = document.createElement('p');
-//     totalRow.textContent = `Total: ${totalCookies.toFixed(0)} cookies`;
-//     theResults.appendChild(totalRow);
-//   }
-// };
+    for (let j = 0; j < location.hourlySalesArray.length; j++) {
+      locationTotal += location.hourlySalesArray[j];
+    }
 
-// city2.hourlyEarnings();
+    let totalCell = document.createElement('td');
+    totalCell.textContent = locationTotal.toFixed(0) + ' cookies';
+    location.hourlySalesArray.push(locationTotal);
+    table.rows[i].appendChild(totalCell);
+  }
+}
 
-// let city3 = {
-//   name: 'Dubai',
-//   minimumCustomer: 11,
-//   maximumCustomer: 38,
-//   averageCookie: 3.7,
-//   randomCustomer: function getRandomInt(min, max) {
-//     min = Math.ceil(min);
-//     max = Math.floor(max);
-//     return Math.floor(Math.random() * (max - min) + min);
-//   },
-//   hourlyEarnings: function earning() {
-//     const theResults = document.getElementById('resultsCity3');
-//     let totalCookies = 0;
-//     for (let i = 0; i < hours.length; i++) {
-//       const randomCustomers = this.randomCustomer(this.minimumCustomer, this.maximumCustomer);
-//       const earnings = randomCustomers * this.averageCookie;
+totalCookiesPerLocation(allLocations);
 
-//       const time = hours[i];
-//       const hourlyResults = `${time}: ${earnings.toFixed(0)} cookies`;
-//       const resultsParagraph = document.createElement('p');
-//       resultsParagraph.textContent = hourlyResults;
-//       theResults.appendChild(resultsParagraph);
+// I referred to ChatGPT a lot to troubleshoot and produce a majority of this code
+// I referred to Brendan's repository to learn insight on how to append content to a table properly
 
-//       totalCookies += earnings;
-//     }
-//     const totalRow = document.createElement('p');
-//     totalRow.textContent = `Total: ${totalCookies.toFixed(0)} cookies`;
-//     theResults.appendChild(totalRow);
-//   }
-// };
 
-// city3.hourlyEarnings();
-
-// let city4 = {
-//   name: 'Paris',
-//   minimumCustomer: 20,
-//   maximumCustomer: 38,
-//   averageCookie: 2.3,
-//   randomCustomer: function getRandomInt(min, max) {
-//     min = Math.ceil(min);
-//     max = Math.floor(max);
-//     return Math.floor(Math.random() * (max - min) + min);
-//   },
-//   hourlyEarnings: function earning() {
-//     const theResults = document.getElementById('resultsCity4');
-//     let totalCookies = 0;
-//     for (let i = 0; i < hours.length; i++) {
-//       const randomCustomers = this.randomCustomer(this.minimumCustomer, this.maximumCustomer);
-//       const earnings = randomCustomers * this.averageCookie;
-
-//       const time = hours[i];
-//       const hourlyResults = `${time}: ${earnings.toFixed(0)} cookies`;
-//       const resultsParagraph = document.createElement('p');
-//       resultsParagraph.textContent = hourlyResults;
-//       theResults.appendChild(resultsParagraph);
-
-//       totalCookies += earnings;
-//     }
-//     const totalRow = document.createElement('p');
-//     totalRow.textContent = `Total: ${totalCookies.toFixed(0)} cookies`;
-//     theResults.appendChild(totalRow);
-//   }
-// };
-
-// city4.hourlyEarnings();
-
-// let city5 = {
-//   name: 'Lima',
-//   minimumCustomer: 20,
-//   maximumCustomer: 38,
-//   averageCookie: 2.3,
-//   randomCustomer: function getRandomInt(min, max) {
-//     min = Math.ceil(min);
-//     max = Math.floor(max);
-//     return Math.floor(Math.random() * (max - min) + min);
-//   },
-//   hourlyEarnings: function earning() {
-//     const theResults = document.getElementById('resultsCity5');
-//     let totalCookies = 0;
-//     for (let i = 0; i < hours.length; i++) {
-//       const randomCustomers = this.randomCustomer(this.minimumCustomer, this.maximumCustomer);
-//       const earnings = randomCustomers * this.averageCookie;
-
-//       const time = hours[i];
-//       const hourlyResults = `${time}: ${earnings.toFixed(0)} cookies`;
-//       const resultsParagraph = document.createElement('p');
-//       resultsParagraph.textContent = hourlyResults;
-//       theResults.appendChild(resultsParagraph);
-
-//       totalCookies += earnings;
-//     }
-//     const totalRow = document.createElement('p');
-//     totalRow.textContent = `Total: ${totalCookies.toFixed(0)} cookies`;
-//     theResults.appendChild(totalRow);
-//   }
-// };
-
-// city5.hourlyEarnings();
