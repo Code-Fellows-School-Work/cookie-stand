@@ -5,10 +5,16 @@ console.log('hello world');
 let stores = [
   {
     name: 'Seattle',
-    hours: '6am-7pm',
-    phoneNumbers: ['Main: 555-1212', 'Fax: 555-6363'],
+    hours: 'Hours Open: 6am-7pm',
+    phoneNumbers: 'Contact Info: 555-1212',
     location: '2901 3rd Ave #300, Seattle, WA 98121',
   },
+  {
+    name: 'Tokyo',
+    hours: 'Hours Open: 6am-7pm',
+    phoneNumbers:'Contact Info: 555-1212',
+    location: '1 Chome-1-2 Oshiage, Sumida City, Tokyo 131-8634'
+  }
 ];
 
 // Function to render store details
@@ -38,13 +44,13 @@ function renderStore(store) {
   storeDataList.appendChild(hoursItem);
 
   // Put the phone numbers in the UL
-  for (let i = 0; i < store.phoneNumbers.length; i++) {
-    const phoneItem = document.createElement('li');
-    // Add the actual number, from the store object
-    phoneItem.textContent = store.phoneNumbers[i];
-    // Append that to the UL
-    storeDataList.appendChild(phoneItem);
-  }
+
+  const phoneItem = document.createElement('li');
+  // Add the actual number, from the store object
+  phoneItem.textContent = store.phoneNumbers;
+  // Append that to the UL
+  storeDataList.appendChild(phoneItem);
+
 
   // Render location details
   const locationItem = document.createElement('li');
