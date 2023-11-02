@@ -11,8 +11,9 @@ h1 {
 h2 {
   font-family: 'Righteous', sans-serif;
   font-size: 2em;
-  padding: 0.5em;
+  padding: 0.25em;
 }
+
 nav {
   color: black;
   background-color: salmon;
@@ -33,7 +34,7 @@ main ul li {
 footer {
   background-color: gray;
   text-align: center;
-  padding: 1em;
+  padding: 2em;
   margin-top: 50px;
 }
 
