@@ -1,207 +1,60 @@
-// let city1 = {
-//   name: 'Seattle',
-//   miniumCustomer: 23,
-//   maximumCustomer: 65,
-//   averageCookie: 6.3,
-//   randomCustomer: function getRandomInt(min, max) {
-//     min = Math.ceil(min);
-//     max = Math.floor(max);
-//     return Math.floor(Math.random() * (max - min) + min);
-//   },
-//   hourlyEarnings: function earning() {
-//     const theResults = document.getElementById('resultsCity1');
-//     let totalCookies = 0;
-//     for (let i = 6; i <= 19; i++) {
-//       const randomCustomers = this.randomCustomer(this.miniumCustomer, this.maximumCustomer);
-//       const earnings = randomCustomers * this.averageCookie;
+'use strict';
 
-//       // Convert the 24-hour format to 12-hour format
-//       let hour12 = i;
-//       const amPm = i < 12 ? 'am' : 'pm';
-//       if (i > 12) {
-//         hour12 = i - 12;
-//       } else if (i === 0) {
-//         hour12 = 12;
-//       }
+console.log('hello world');
 
-//       const time = `${hour12} ${amPm}`;
-//       const hourlyResults = `${time}: ${earnings.toFixed(0)} cookies`;
-//       const resultsParagraph = document.createElement('p');
-//       resultsParagraph.textContent = hourlyResults;
-//       theResults.appendChild(resultsParagraph);
+let stores = [
+  {
+    name: 'Seattle',
+    hours: '6am-7pm',
+    phoneNumbers: ['Main: 555-1212', 'Fax: 555-6363'],
+    location: '2901 3rd Ave #300, Seattle, WA 98121',
+  },
+];
 
-//       totalCookies += earnings;
-//     }
-//     const totalRow = document.createElement('p');
-//     totalRow.textContent = `Total: ${totalCookies.toFixed(0)} cookies`;
-//     theResults.appendChild(totalRow);
-//   }
-// };
+// Function to render store details
+function renderStore(store) {
+  // Looks for any element with an id="locations", i.e.
+  // <section id="locations">
+  let rootElement = document.getElementById('locations');
 
-// city1.hourlyEarnings();
+  // Create a new, empty section for a store
+  let storeSection = document.createElement('section');
+  storeSection.classList.add('location');
+  rootElement.appendChild(storeSection);
 
-// let city2 = {
-//   name: 'Tokyo',
-//   miniumCustomer: 3,
-//   maximumCustomer: 24,
-//   averageCookie: 6.3,
-//   randomCustomer: function getRandomInt(min, max) {
-//     min = Math.ceil(min);
-//     max = Math.floor(max);
-//     return Math.floor(Math.random() * (max - min) + min);
-//   },
-//   hourlyEarnings: function earning() {
-//     const theResults = document.getElementById('resultsCity2');
-//     let totalCookies = 0;
-//     for (let i = 6; i <= 19; i++) {
-//       const randomCustomers = this.randomCustomer(this.miniumCustomer, this.maximumCustomer);
-//       const earnings = randomCustomers * this.averageCookie;
+  let firstTitle = document.createElement('h2');
+  // Give it some content
+  firstTitle.textContent = store.name;
+  // Add it to the page, as a child of rootElement
+  storeSection.appendChild(firstTitle);
 
-//       // Convert the 24-hour format to 12-hour format
-//       let hour12 = i;
-//       const amPm = i < 12 ? 'am' : 'pm';
-//       if (i > 12) {
-//         hour12 = i - 12;
-//       } else if (i === 0) {
-//         hour12 = 12;
-//       }
+  // Add an unordered list to show the store details...
+  let storeDataList = document.createElement('ul');
+  storeSection.appendChild(storeDataList);
 
-//       const time = `${hour12} ${amPm}`;
-//       const hourlyResults = `${time}: ${earnings.toFixed(0)} cookies`;
-//       const resultsParagraph = document.createElement('p');
-//       resultsParagraph.textContent = hourlyResults;
-//       theResults.appendChild(resultsParagraph);
+  // Render hours
+  const hoursItem = document.createElement('li');
+  hoursItem.textContent = 'Hours: ' + store.hours;
+  storeDataList.appendChild(hoursItem);
 
-//       totalCookies += earnings;
-//     }
-//     const totalRow = document.createElement('p');
-//     totalRow.textContent = `Total: ${totalCookies.toFixed(0)} cookies`;
-//     theResults.appendChild(totalRow);
-//   }
-// };
-// city2.hourlyEarnings();
+  // Put the phone numbers in the UL
+  for (let i = 0; i < store.phoneNumbers.length; i++) {
+    const phoneItem = document.createElement('li');
+    // Add the actual number, from the store object
+    phoneItem.textContent = store.phoneNumbers[i];
+    // Append that to the UL
+    storeDataList.appendChild(phoneItem);
+  }
 
-// let city3 = {
-//   name: 'Dubai',
-//   miniumCustomer: 11,
-//   maximumCustomer: 38,
-//   averageCookie: 3.7,
-//   randomCustomer: function getRandomInt(min, max) {
-//     min = Math.ceil(min);
-//     max = Math.floor(max);
-//     return Math.floor(Math.random() * (max - min) + min);
-//   },
-//   hourlyEarnings: function earning() {
-//     const theResults = document.getElementById('resultsCity3');
-//     let totalCookies = 0;
-//     for (let i = 6; i <= 19; i++) {
-//       const randomCustomers = this.randomCustomer(this.miniumCustomer, this.maximumCustomer);
-//       const earnings = randomCustomers * this.averageCookie;
+  // Render location details
+  const locationItem = document.createElement('li');
+  locationItem.textContent = 'Location: ' + store.location;
+  storeDataList.appendChild(locationItem);
+}
 
-//       // Convert the 24-hour format to 12-hour format
-//       let hour12 = i;
-//       const amPm = i < 12 ? 'am' : 'pm';
-//       if (i > 12) {
-//         hour12 = i - 12;
-//       } else if (i === 0) {
-//         hour12 = 12;
-//       }
+// Loop through the stores array and render each store
+for (const store of stores) {
+  renderStore(store);
+}
 
-//       const time = `${hour12} ${amPm}`;
-//       const hourlyResults = `${time}: ${earnings.toFixed(0)} cookies`;
-//       const resultsParagraph = document.createElement('p');
-//       resultsParagraph.textContent = hourlyResults;
-//       theResults.appendChild(resultsParagraph);
 
-//       totalCookies += earnings;
-//     }
-//     const totalRow = document.createElement('p');
-//     totalRow.textContent = `Total: ${totalCookies.toFixed(0)} cookies`;
-//     theResults.appendChild(totalRow);
-//   }
-// };
-// city3.hourlyEarnings();
-
-// let city4 = {
-//   name: 'Paris',
-//   miniumCustomer: 20,
-//   maximumCustomer: 38,
-//   averageCookie: 2.3,
-//   randomCustomer: function getRandomInt(min, max) {
-//     min = Math.ceil(min);
-//     max = Math.floor(max);
-//     return Math.floor(Math.random() * (max - min) + min);
-//   },
-//   hourlyEarnings: function earning() {
-//     const theResults = document.getElementById('resultsCity4');
-//     let totalCookies = 0;
-//     for (let i = 6; i <= 19; i++) {
-//       const randomCustomers = this.randomCustomer(this.miniumCustomer, this.maximumCustomer);
-//       const earnings = randomCustomers * this.averageCookie;
-
-//       // Convert the 24-hour format to 12-hour format
-//       let hour12 = i;
-//       const amPm = i < 12 ? 'am' : 'pm';
-//       if (i > 12) {
-//         hour12 = i - 12;
-//       } else if (i === 0) {
-//         hour12 = 12;
-//       }
-
-//       const time = `${hour12} ${amPm}`;
-//       const hourlyResults = `${time}: ${earnings.toFixed(0)} cookies`;
-//       const resultsParagraph = document.createElement('p');
-//       resultsParagraph.textContent = hourlyResults;
-//       theResults.appendChild(resultsParagraph);
-
-//       totalCookies += earnings;
-//     }
-//     const totalRow = document.createElement('p');
-//     totalRow.textContent = `Total: ${totalCookies.toFixed(0)} cookies`;
-//     theResults.appendChild(totalRow);
-//   }
-// };
-
-// city4.hourlyEarnings();
-
-// let city5 = {
-//   name: 'Lima',
-//   miniumCustomer: 2,
-//   maximumCustomer: 16,
-//   averageCookie: 4.6,
-//   randomCustomer: function getRandomInt(min, max) {
-//     min = Math.ceil(min);
-//     max = Math.floor(max);
-//     return Math.floor(Math.random() * (max - min) + min);
-//   },
-//   hourlyEarnings: function earning() {
-//     const theResults = document.getElementById('resultsCity5');
-//     let totalCookies = 0;
-//     for (let i = 6; i <= 19; i++) {
-//       const randomCustomers = this.randomCustomer(this.miniumCustomer, this.maximumCustomer);
-//       const earnings = randomCustomers * this.averageCookie;
-
-//       // Convert the 24-hour format to 12-hour format
-//       let hour12 = i;
-//       const amPm = i < 12 ? 'am' : 'pm';
-//       if (i > 12) {
-//         hour12 = i - 12;
-//       } else if (i === 0) {
-//         hour12 = 12;
-//       }
-
-//       const time = `${hour12} ${amPm}`;
-//       const hourlyResults = `${time}: ${earnings.toFixed(0)} cookies`;
-//       const resultsParagraph = document.createElement('p');
-//       resultsParagraph.textContent = hourlyResults;
-//       theResults.appendChild(resultsParagraph);
-
-//       totalCookies += earnings;
-//     }
-//     const totalRow = document.createElement('p');
-//     totalRow.textContent = `Total: ${totalCookies.toFixed(0)} cookies`;
-//     theResults.appendChild(totalRow);
-//   }
-// };
-
-// city5.hourlyEarnings();
