@@ -129,6 +129,7 @@ function totalCookiesPerLocation(locations) {
 
 totalCookiesPerLocation(allLocations);
 
+// ---- forms
 
 
 // I referred to ChatGPT a lot to troubleshoot and produce a majority of this code
