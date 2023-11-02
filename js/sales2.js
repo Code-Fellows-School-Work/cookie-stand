@@ -1,8 +1,4 @@
 'use strict';
-// could have used this instead for the times:
-// let hours = ['6am', '7am', '8am'];
-// it's important to change hours and estimates into arrays so that they're the same length
-// can also put stores in array
 
 let hours = ['6am', '7am', '8am', '9am', '10am', '11am', '12am', '1pm', '2pm', '3pm', '4pm', '5pm', '6pm', '7pm', 'Daily Location Total'];
 let totalForEachHour = [];
@@ -96,18 +92,41 @@ function getTotalHourSales() {
 
 getTotalHourSales();
 
-let totalsOfAllEl = document.getElementById('everyLocationTotal');
-let totalsRowsEl = document.createElement('tr');
-let totalsDataEl = document.createElement('th');
-totalsDataEl.textContent = 'Total';
-totalsRowsEl.append(totalsDataEl);
-totalsOfAllEl.append(totalsRowsEl);
+let totalsOfAllCell = document.getElementById('everyLocationTotal');
+let totalsRowsCell = document.createElement('tr');
+let totalsDataCell = document.createElement('th');
+totalsDataCell.textContent = 'Total';
+totalsRowsCell.append(totalsDataCell);
+totalsOfAllCell.append(totalsRowsCell);
 for (let i = 0; i <hours.length; i++) {
   let totalHourlyData = document.createElement('td');
-  totalHourlyData.textContent = totalForEachHour[i];
-  totalsRowsEl.append(totalHourlyData);
+  totalHourlyData.textContent = Math.round(totalForEachHour[i]) + ' cookies';
+  totalsRowsCell.append(totalHourlyData);
 }
 let grandTotal = document.createElement('td');
-grandTotal.textContent = Math.round(totalOfAllLocations); // Use Math.round() for the grand total
-totalsRowsEl.appendChild(grandTotal);
-totalsOfAllEl.appendChild(totalsRowsEl);
+grandTotal.textContent = Math.round(totalOfAllLocations) + ' cookies';
+totalsRowsCell.appendChild(grandTotal);
+totalsOfAllCell.appendChild(totalsRowsCell);
+
+
+function appendTotalCookiesPerLocation(locations) {
+  let table = document.getElementById('income');
+
+  for (let i = 0; i < locations.length; i++) {
+    let location = locations[i];
+    let locationTotal = 0;
+
+    for (let j = 0; j < location.hourlySalesArray.length; j++) {
+      locationTotal += location.hourlySalesArray[j];
+    }
+
+    let totalCell = document.createElement('td');
+    totalCell.textContent = locationTotal.toFixed(0) + ' cookies';
+    location.hourlySalesArray.push(locationTotal);
+    table.rows[i].appendChild(totalCell);
+  }
+}
+
+// Call the function with your array of store locations
+appendTotalCookiesPerLocation(allLocations);
+
