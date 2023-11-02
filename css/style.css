@@ -12,6 +12,7 @@ nav {
   color: black;
   background-color: salmon;
   border: 25px;
+  padding: 0.75em;
 }
 
 header nav li {
@@ -50,7 +51,7 @@ main ul li {
 footer {
   background-color: gray;
   text-align: center;
-  padding: 1em;
+  padding: 2em;
 }
 
 section #results-city1 {

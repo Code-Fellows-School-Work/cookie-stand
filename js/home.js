@@ -1,207 +1,68 @@
-// let city1 = {
-//   name: 'Seattle',
-//   miniumCustomer: 23,
-//   maximumCustomer: 65,
-//   averageCookie: 6.3,
-//   randomCustomer: function getRandomInt(min, max) {
-//     min = Math.ceil(min);
-//     max = Math.floor(max);
-//     return Math.floor(Math.random() * (max - min) + min);
-//   },
-//   hourlyEarnings: function earning() {
-//     const theResults = document.getElementById('resultsCity1');
-//     let totalCookies = 0;
-//     for (let i = 6; i <= 19; i++) {
-//       const randomCustomers = this.randomCustomer(this.miniumCustomer, this.maximumCustomer);
-//       const earnings = randomCustomers * this.averageCookie;
+'use strict';
 
-//       // Convert the 24-hour format to 12-hour format
-//       let hour12 = i;
-//       const amPm = i < 12 ? 'am' : 'pm';
-//       if (i > 12) {
-//         hour12 = i - 12;
-//       } else if (i === 0) {
-//         hour12 = 12;
-//       }
+let stores = [
+  {
+    name: 'Seattle',
+    hours: 'Hours Open: 6am-7pm',
+    phoneNumbers: 'Contact Info: 123-456-7890',
+    location: '2901 3rd Ave #300, Seattle, WA 98121',
+  },
+  {
+    name: 'Tokyo',
+    hours: 'Hours Open: 6am-7pm',
+    phoneNumbers:'Contact Info: 222-222-2222',
+    location: '1 Chome-1-2 Oshiage, Sumida City, Tokyo 131-8634'
+  },
+  {
+    name: 'Dubai',
+    hours: 'Hours Open: 6am-7pm',
+    phoneNumbers:'Contact Info: 333-333-333',
+    location: '1 Sheikh Mohammed bin Rashid Blvd - Dubai'
+  },
+  {
+    name: 'Paris',
+    hours: 'Hours Open: 6am-7pm',
+    phoneNumbers:'Contact Info: 444-444-4444',
+    location: 'Champ de Mars, 5 Avenue Anatole France, 75007 Paris'
+  },
+  {
+    name: 'Lima',
+    hours: 'Hours Open: 6am-7pm',
+    phoneNumbers:'Contact Info: 555-555-5555',
+    location: 'Ca. Gral. Borgono cuadra 8, Miraflores 15074'
+  }
+];
 
-//       const time = `${hour12} ${amPm}`;
-//       const hourlyResults = `${time}: ${earnings.toFixed(0)} cookies`;
-//       const resultsParagraph = document.createElement('p');
-//       resultsParagraph.textContent = hourlyResults;
-//       theResults.appendChild(resultsParagraph);
+// renders store elements
+function renderStore(store) {
+  let rootElement = document.getElementById('locations');
+  let storeSection = document.createElement('section');
+  storeSection.classList.add('location');
+  rootElement.appendChild(storeSection);
 
-//       totalCookies += earnings;
-//     }
-//     const totalRow = document.createElement('p');
-//     totalRow.textContent = `Total: ${totalCookies.toFixed(0)} cookies`;
-//     theResults.appendChild(totalRow);
-//   }
-// };
+  let firstTitle = document.createElement('h2');
+  firstTitle.textContent = store.name;
+  storeSection.appendChild(firstTitle);
 
-// city1.hourlyEarnings();
+  let storeDataList = document.createElement('ul');
+  storeSection.appendChild(storeDataList);
 
-// let city2 = {
-//   name: 'Tokyo',
-//   miniumCustomer: 3,
-//   maximumCustomer: 24,
-//   averageCookie: 6.3,
-//   randomCustomer: function getRandomInt(min, max) {
-//     min = Math.ceil(min);
-//     max = Math.floor(max);
-//     return Math.floor(Math.random() * (max - min) + min);
-//   },
-//   hourlyEarnings: function earning() {
-//     const theResults = document.getElementById('resultsCity2');
-//     let totalCookies = 0;
-//     for (let i = 6; i <= 19; i++) {
-//       const randomCustomers = this.randomCustomer(this.miniumCustomer, this.maximumCustomer);
-//       const earnings = randomCustomers * this.averageCookie;
+  const hoursItem = document.createElement('li');
+  hoursItem.textContent = 'Hours: ' + store.hours;
+  storeDataList.appendChild(hoursItem);
 
-//       // Convert the 24-hour format to 12-hour format
-//       let hour12 = i;
-//       const amPm = i < 12 ? 'am' : 'pm';
-//       if (i > 12) {
-//         hour12 = i - 12;
-//       } else if (i === 0) {
-//         hour12 = 12;
-//       }
+  const phoneItem = document.createElement('li');
+  phoneItem.textContent = store.phoneNumbers;
+  storeDataList.appendChild(phoneItem);
 
-//       const time = `${hour12} ${amPm}`;
-//       const hourlyResults = `${time}: ${earnings.toFixed(0)} cookies`;
-//       const resultsParagraph = document.createElement('p');
-//       resultsParagraph.textContent = hourlyResults;
-//       theResults.appendChild(resultsParagraph);
+  const locationItem = document.createElement('li');
+  locationItem.textContent = 'Location: ' + store.location;
+  storeDataList.appendChild(locationItem);
+}
 
-//       totalCookies += earnings;
-//     }
-//     const totalRow = document.createElement('p');
-//     totalRow.textContent = `Total: ${totalCookies.toFixed(0)} cookies`;
-//     theResults.appendChild(totalRow);
-//   }
-// };
-// city2.hourlyEarnings();
+// loops through array of stores
+for (const store of stores) {
+  renderStore(store);
+}
 
-// let city3 = {
-//   name: 'Dubai',
-//   miniumCustomer: 11,
-//   maximumCustomer: 38,
-//   averageCookie: 3.7,
-//   randomCustomer: function getRandomInt(min, max) {
-//     min = Math.ceil(min);
-//     max = Math.floor(max);
-//     return Math.floor(Math.random() * (max - min) + min);
-//   },
-//   hourlyEarnings: function earning() {
-//     const theResults = document.getElementById('resultsCity3');
-//     let totalCookies = 0;
-//     for (let i = 6; i <= 19; i++) {
-//       const randomCustomers = this.randomCustomer(this.miniumCustomer, this.maximumCustomer);
-//       const earnings = randomCustomers * this.averageCookie;
-
-//       // Convert the 24-hour format to 12-hour format
-//       let hour12 = i;
-//       const amPm = i < 12 ? 'am' : 'pm';
-//       if (i > 12) {
-//         hour12 = i - 12;
-//       } else if (i === 0) {
-//         hour12 = 12;
-//       }
-
-//       const time = `${hour12} ${amPm}`;
-//       const hourlyResults = `${time}: ${earnings.toFixed(0)} cookies`;
-//       const resultsParagraph = document.createElement('p');
-//       resultsParagraph.textContent = hourlyResults;
-//       theResults.appendChild(resultsParagraph);
-
-//       totalCookies += earnings;
-//     }
-//     const totalRow = document.createElement('p');
-//     totalRow.textContent = `Total: ${totalCookies.toFixed(0)} cookies`;
-//     theResults.appendChild(totalRow);
-//   }
-// };
-// city3.hourlyEarnings();
-
-// let city4 = {
-//   name: 'Paris',
-//   miniumCustomer: 20,
-//   maximumCustomer: 38,
-//   averageCookie: 2.3,
-//   randomCustomer: function getRandomInt(min, max) {
-//     min = Math.ceil(min);
-//     max = Math.floor(max);
-//     return Math.floor(Math.random() * (max - min) + min);
-//   },
-//   hourlyEarnings: function earning() {
-//     const theResults = document.getElementById('resultsCity4');
-//     let totalCookies = 0;
-//     for (let i = 6; i <= 19; i++) {
-//       const randomCustomers = this.randomCustomer(this.miniumCustomer, this.maximumCustomer);
-//       const earnings = randomCustomers * this.averageCookie;
-
-//       // Convert the 24-hour format to 12-hour format
-//       let hour12 = i;
-//       const amPm = i < 12 ? 'am' : 'pm';
-//       if (i > 12) {
-//         hour12 = i - 12;
-//       } else if (i === 0) {
-//         hour12 = 12;
-//       }
-
-//       const time = `${hour12} ${amPm}`;
-//       const hourlyResults = `${time}: ${earnings.toFixed(0)} cookies`;
-//       const resultsParagraph = document.createElement('p');
-//       resultsParagraph.textContent = hourlyResults;
-//       theResults.appendChild(resultsParagraph);
-
-//       totalCookies += earnings;
-//     }
-//     const totalRow = document.createElement('p');
-//     totalRow.textContent = `Total: ${totalCookies.toFixed(0)} cookies`;
-//     theResults.appendChild(totalRow);
-//   }
-// };
-
-// city4.hourlyEarnings();
-
-// let city5 = {
-//   name: 'Lima',
-//   miniumCustomer: 2,
-//   maximumCustomer: 16,
-//   averageCookie: 4.6,
-//   randomCustomer: function getRandomInt(min, max) {
-//     min = Math.ceil(min);
-//     max = Math.floor(max);
-//     return Math.floor(Math.random() * (max - min) + min);
-//   },
-//   hourlyEarnings: function earning() {
-//     const theResults = document.getElementById('resultsCity5');
-//     let totalCookies = 0;
-//     for (let i = 6; i <= 19; i++) {
-//       const randomCustomers = this.randomCustomer(this.miniumCustomer, this.maximumCustomer);
-//       const earnings = randomCustomers * this.averageCookie;
-
-//       // Convert the 24-hour format to 12-hour format
-//       let hour12 = i;
-//       const amPm = i < 12 ? 'am' : 'pm';
-//       if (i > 12) {
-//         hour12 = i - 12;
-//       } else if (i === 0) {
-//         hour12 = 12;
-//       }
-
-//       const time = `${hour12} ${amPm}`;
-//       const hourlyResults = `${time}: ${earnings.toFixed(0)} cookies`;
-//       const resultsParagraph = document.createElement('p');
-//       resultsParagraph.textContent = hourlyResults;
-//       theResults.appendChild(resultsParagraph);
-
-//       totalCookies += earnings;
-//     }
-//     const totalRow = document.createElement('p');
-//     totalRow.textContent = `Total: ${totalCookies.toFixed(0)} cookies`;
-//     theResults.appendChild(totalRow);
-//   }
-// };
-
-// city5.hourlyEarnings();
+// used John's class demo and ChatGPT to generate code structure

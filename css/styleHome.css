@@ -1,0 +1,44 @@
+h1 {
+  font-family: 'Righteous', sans-serif;
+  color: salmon;
+  background-color: black;
+  text-align: center;
+  font-size: 2em;
+  font-style: italic;
+  padding: 1em;
+}
+
+h2 {
+  font-family: 'Righteous', sans-serif;
+  font-size: 2em;
+  padding: 0.25em;
+}
+
+nav {
+  color: black;
+  background-color: salmon;
+  border: 25px;
+  padding: 0.75em;
+}
+
+header nav li {
+  display:inline-block;
+  margin-left: 50px;
+}
+
+main ul li {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  margin-left: 75px;
+}
+
+footer {
+  background-color: gray;
+  text-align: center;
+  padding: 2em;
+  margin-top: 50px;
+}
+
+.fish {
+  text-align: center;
+}
+
