@@ -58,7 +58,7 @@ Store.prototype.render = function () {
     let earnings = randomCustomers * this.averageCookie;
     cell.textContent = `${earnings.toFixed(0)} cookies`;
     StoreRow.appendChild(cell);
-    this.hourlySalesArray.push(earnings); // Add earnings to the hourlySalesArray
+    this.hourlySalesArray.push(earnings);
   }
 };
 
