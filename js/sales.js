@@ -131,5 +131,5 @@ totalCookiesPerLocation(allLocations);
 
 // I referred to ChatGPT a lot to troubleshoot and produce a majority of this code
 // I referred to Brendan's repository to learn insight on how to append content to a table properly
-
+// adding extra line because previous commit did not work
 
