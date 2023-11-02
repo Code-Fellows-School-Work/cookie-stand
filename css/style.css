@@ -12,6 +12,7 @@ nav {
   color: black;
   background-color: salmon;
   border: 25px;
+  padding: 0.75em;
 }
 
 header nav li {
