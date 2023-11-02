@@ -65,3 +65,11 @@ table * {
   border: 1px solid;
   padding: .5em;
 }
+
+table {
+  background-color: grey;
+}
+
+table tbody {
+  background-color: salmon;
+}
