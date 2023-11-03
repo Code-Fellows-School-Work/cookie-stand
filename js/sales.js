@@ -134,10 +134,10 @@ totalCookiesPerLocation(allLocations);
 document.getElementById('newStoreForm').addEventListener('submit', function (event) {
   event.preventDefault();
 
-  const newCity = document.getElementById('newCity').value;
-  const newMinCustomer = +document.getElementById('newMinCustomer').value;
-  const newMaxCustomer = +document.getElementById('newMaxCustomer').value;
-  const newAvgCookie = +document.getElementById('newAvgCookie').value;
+  let newCity = document.getElementById('newCity').value;
+  let newMinCustomer = +document.getElementById('newMinCustomer').value;
+  let newMaxCustomer = +document.getElementById('newMaxCustomer').value;
+  let newAvgCookie = +document.getElementById('newAvgCookie').value;
 
   // Create a new store using the constructor
   const newStore = new Store(newCity, newMinCustomer, newMaxCustomer, newAvgCookie);
@@ -145,13 +145,25 @@ document.getElementById('newStoreForm').addEventListener('submit', function (eve
   // Render the new store
   newStore.render();
 
+  // Calculate the daily total for the new store
+  newStore.hourlyEarnings();
+
+  // Push the new location's daily total to totalOfAllLocations
+  totalOfAllLocations += newStore.dailySalesTotal;
+
   // Clear the form fields
   document.getElementById('newCity').value = '';
   document.getElementById('newMinCustomer').value = '';
   document.getElementById('newMaxCustomer').value = '';
   document.getElementById('newAvgCookie').value = '';
 
+  // Recalculate the total cookies per hour and per location
+  totalHourSales();
+  totalCookiesPerLocation(allLocations);
 });
+
+
+
 
 
 
