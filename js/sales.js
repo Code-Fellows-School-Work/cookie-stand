@@ -129,6 +129,35 @@ function totalCookiesPerLocation(locations) {
 
 totalCookiesPerLocation(allLocations);
 
+// --- forms ---
+
+document.getElementById('newStoreForm').addEventListener('submit', function (event) {
+  event.preventDefault();
+
+  const newCity = document.getElementById('newCity').value;
+  const newMinCustomer = +document.getElementById('newMinCustomer').value;
+  const newMaxCustomer = +document.getElementById('newMaxCustomer').value;
+  const newAvgCookie = +document.getElementById('newAvgCookie').value;
+
+  // Create a new store using the constructor
+  const newStore = new Store(newCity, newMinCustomer, newMaxCustomer, newAvgCookie);
+
+  // Render the new store
+  newStore.render();
+
+  // Clear the form fields
+  document.getElementById('newCity').value = '';
+  document.getElementById('newMinCustomer').value = '';
+  document.getElementById('newMaxCustomer').value = '';
+  document.getElementById('newAvgCookie').value = '';
+
+});
+
+
+
+
+
+
 // I referred to ChatGPT a lot to troubleshoot and produce a majority of this code
 // I referred to Brendan's repository to learn insight on how to append content to a table properly
 
