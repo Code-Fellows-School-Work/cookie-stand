@@ -12,7 +12,6 @@ function Store(location, minCustomer, maxCustomer, avgCookie) {
   this.averageCookie = avgCookie;
   this.hourlySalesArray = [];
   this.dailySalesTotal = 0;
-  this.locationTotalCell = null;
 }
 
 Store.prototype.randomCustomer = function getRandomInt(min, max) {
@@ -22,7 +21,7 @@ Store.prototype.randomCustomer = function getRandomInt(min, max) {
 };
 
 Store.prototype.hourlyEarnings = function earning() {
-  let theResults = this.locationTotalCell.parentNode; //
+  let theResults = document.getElementById(this.id); //
   let totalCookies = 0;
 
   for (let i = 0; i < hours.length; i++) {
@@ -45,9 +44,9 @@ Store.prototype.hourlyEarnings = function earning() {
 
 
 Store.prototype.render = function () {
-  let element = document.getElementById('income');
+  let table = document.getElementById('income');
   let StoreRow = document.createElement('tr');
-  element.appendChild(StoreRow);
+  table.appendChild(StoreRow);
 
   let locationCell = document.createElement('td');
   locationCell.textContent = this.location;
@@ -140,21 +139,35 @@ document.getElementById('newStoreForm').addEventListener('submit', function (eve
   let newMaxCustomer = +document.getElementById('newMaxCustomer').value;
   let newAvgCookie = +document.getElementById('newAvgCookie').value;
 
-  // new store constructor
-  let newStore = new Store(newCity, newMinCustomer, newMaxCustomer, newAvgCookie);
+  // Create a new store using the constructor
+  const newStore = new Store(newCity, newMinCustomer, newMaxCustomer, newAvgCookie);
 
+  // Render the new store
   newStore.render();
+
+  // Calculate the daily total for the new store
   newStore.hourlyEarnings();
+
+  // Push the new location's daily total to totalOfAllLocations
   totalOfAllLocations += newStore.dailySalesTotal;
 
+  // Clear the form fields
   document.getElementById('newCity').value = '';
   document.getElementById('newMinCustomer').value = '';
   document.getElementById('newMaxCustomer').value = '';
   document.getElementById('newAvgCookie').value = '';
 
+  // Recalculate the total cookies per hour and per location
   totalHourSales();
   totalCookiesPerLocation(allLocations);
 });
+
+
+
+
+
+
+
 
 
 // I referred to ChatGPT a lot to troubleshoot and produce a majority of this code
