@@ -22,7 +22,7 @@ Store.prototype.randomCustomer = function getRandomInt(min, max) {
 };
 
 Store.prototype.hourlyEarnings = function earning() {
-  let theResults = this.locationTotalCell.parentNode; //
+  let theResults = this.locationTotalCell.parentNode;
   let totalCookies = 0;
 
   for (let i = 0; i < hours.length; i++) {

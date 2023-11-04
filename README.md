@@ -9,6 +9,7 @@ Code Fellow Course 201 Module 02
 10/31 - created constructor function and appended table to sales page to record cookies sales per location, per hour
 11/01 - updated sales table to include total cookie sales per location and total cookie sales per hour
 11/02 - updated home page to dynamically render stores detail onto home page and formatted CSS to align with mockup
+11/02 10:30pm - updated html to include forms and updated sales to include addeventlistener for new store entry
 
 ![Lighthouse Home Page](img/Lighthouse%20-%20Home%20page.PNG)
 ![Lighthouse Sales Page](img/Lighthouse%20-%20Sales%20page.PNG)
