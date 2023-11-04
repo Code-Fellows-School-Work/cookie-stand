@@ -20,11 +20,33 @@ header nav li {
   margin-left: 50px;
 }
 
+.inline-paragraph {
+  display: inline;
+  padding: 1em;
+}
+
+.centered-image {
+  text-align: center;
+}
+
+.centered-image img {
+  max-width: 100%;
+  display: inline-block;
+}
+
 .google-font {
   font-family: 'Righteous', sans-serif;
   font-size: 1.5em;
 }
 
+main ul li {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  margin-left: 75px;
+}
+
+#city-name {
+  font-family: 'Righteous', sans-serif;
+}
 
 footer {
   background-color: gray;
@@ -32,7 +54,13 @@ footer {
   padding: 2em;
 }
 
+section #results-city1 {
+  margin-left: 20px;
+}
 
+main h2 {
+  margin-left: 50px;
+}
 
 table * {
   border: 1px solid;
@@ -41,8 +69,6 @@ table * {
 
 table {
   background-color: grey;
-  margin: 0 auto; /* This centers the table horizontally */
-  text-align: center; /* Reset the text alignment if needed */
 }
 
 table tbody {
@@ -50,6 +76,7 @@ table tbody {
 }
 
 table {
-
+  margin: 0 auto; /* This centers the table horizontally */
+  text-align: center; /* Reset the text alignment if needed */
 }
 
