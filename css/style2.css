@@ -20,7 +20,7 @@ header nav li {
   margin-left: 50px;
 }
 
-.inline-paragraph {
+/* .inline-paragraph {
   display: inline;
   padding: 1em;
 }
@@ -37,7 +37,7 @@ header nav li {
 .google-font {
   font-family: 'Righteous', sans-serif;
   font-size: 1.5em;
-}
+} */
 
 main ul li {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
