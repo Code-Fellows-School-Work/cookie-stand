@@ -23,27 +23,27 @@ Store.prototype.randomCustomer = function getRandomInt(min, max) {
 };
 
 // generate hourly earnings and append to table
-Store.prototype.hourlyEarnings = function earning() {
-  let theResults = this.locationTotalCell.parentNode;
-  let totalCookies = 0;
+// Store.prototype.hourlyEarnings = function earning() {
+//   let theResults = this.locationTotalCell.parentNode;
+//   let totalCookies = 0;
 
-  for (let i = 0; i < hours.length; i++) {
-    let randomCustomers = this.randomCustomer(this.minimumCustomer, this.maximumCustomer);
-    let earnings = randomCustomers * this.averageCookie;
+//   for (let i = 0; i < hours.length; i++) {
+//     let randomCustomers = this.randomCustomer(this.minimumCustomer, this.maximumCustomer);
+//     let earnings = randomCustomers * this.averageCookie;
 
-    let time = hours[i];
-    let hourlyResults = `${time}: ${earnings.toFixed(0)} cookies`;
-    let income = document.createElement('td');
-    income.textContent = hourlyResults;
-    theResults.appendChild(income);
+//     let time = hours[i];
+//     let hourlyResults = `${time}: ${earnings.toFixed(0)} cookies`;
+//     let income = document.createElement('td');
+//     income.textContent = hourlyResults;
+//     // theResults.appendChild(income);
 
-    this.hourlySalesArray.push(earnings);
-    totalCookies += earnings;
-  }
-  let totalRow = document.createElement('td');
-  totalRow.textContent = `Total: ${totalCookies.toFixed(0)} cookies`;
-  theResults.appendChild(totalRow);
-};
+//     this.hourlySalesArray.push(earnings);
+//     // totalCookies += earnings;
+//   }
+//   // let totalRow = document.createElement('td');
+//   // totalRow.textContent = `Total: ${totalCookies.toFixed(0)} cookies`;
+//   // // theResults.appendChild(totalRow);
+// };
 
 
 Store.prototype.render = function () {
@@ -147,7 +147,8 @@ document.getElementById('newStoreForm').addEventListener('submit', function (eve
 
   // render the new store in the table
   newStore.render();
-  newStore.hourlyEarnings();
+  console.log(newStore.render);
+  // newStore.hourlyEarnings();
 
   // add the new store to the allLocations array
   allLocations.push(newStore);
