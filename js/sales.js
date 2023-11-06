@@ -12,36 +12,38 @@ function Store(location, minCustomer, maxCustomer, avgCookie) {
   this.averageCookie = avgCookie;
   this.hourlySalesArray = [];
   this.dailySalesTotal = 0;
-  this.locationTotalCell = null;
+  this.locationTotalCell = 0;
 }
 
+// generate random customer number
 Store.prototype.randomCustomer = function getRandomInt(min, max) {
   min = Math.ceil(min);
   max = Math.floor(max);
   return Math.floor(Math.random() * (max - min) + min);
 };
 
-Store.prototype.hourlyEarnings = function earning() {
-  let theResults = this.locationTotalCell.parentNode;
-  let totalCookies = 0;
+// generate hourly earnings and append to table
+// Store.prototype.hourlyEarnings = function earning() {
+//   let theResults = this.locationTotalCell.parentNode;
+//   let totalCookies = 0;
 
-  for (let i = 0; i < hours.length; i++) {
-    let randomCustomers = this.randomCustomer(this.minimumCustomer, this.maximumCustomer);
-    let earnings = randomCustomers * this.averageCookie;
+//   for (let i = 0; i < hours.length; i++) {
+//     let randomCustomers = this.randomCustomer(this.minimumCustomer, this.maximumCustomer);
+//     let earnings = randomCustomers * this.averageCookie;
 
-    let time = hours[i];
-    let hourlyResults = `${time}: ${earnings.toFixed(0)} cookies`;
-    let income = document.createElement('td');
-    income.textContent = hourlyResults;
-    theResults.appendChild(income);
+//     let time = hours[i];
+//     let hourlyResults = `${time}: ${earnings.toFixed(0)} cookies`;
+//     let income = document.createElement('td');
+//     income.textContent = hourlyResults;
+//     // theResults.appendChild(income);
 
-    this.hourlySalesArray.push(earnings);
-    totalCookies += earnings;
-  }
-  let totalRow = document.createElement('td');
-  totalRow.textContent = `Total: ${totalCookies.toFixed(0)} cookies`;
-  theResults.appendChild(totalRow);
-};
+//     this.hourlySalesArray.push(earnings);
+//     // totalCookies += earnings;
+//   }
+//   // let totalRow = document.createElement('td');
+//   // totalRow.textContent = `Total: ${totalCookies.toFixed(0)} cookies`;
+//   // // theResults.appendChild(totalRow);
+// };
 
 
 Store.prototype.render = function () {
@@ -140,21 +142,28 @@ document.getElementById('newStoreForm').addEventListener('submit', function (eve
   let newMaxCustomer = +document.getElementById('newMaxCustomer').value;
   let newAvgCookie = +document.getElementById('newAvgCookie').value;
 
-  // new store constructor
+  // New store constructor
   let newStore = new Store(newCity, newMinCustomer, newMaxCustomer, newAvgCookie);
 
+  // render the new store in the table
   newStore.render();
-  newStore.hourlyEarnings();
-  totalOfAllLocations += newStore.dailySalesTotal;
+  console.log(newStore.render);
+  // newStore.hourlyEarnings();
 
+  // add the new store to the allLocations array
+  allLocations.push(newStore);
+
+  // clear the form input fields
   document.getElementById('newCity').value = '';
   document.getElementById('newMinCustomer').value = '';
   document.getElementById('newMaxCustomer').value = '';
   document.getElementById('newAvgCookie').value = '';
 
+  // recalculate the total cookies per hour and per location
   totalHourSales();
   totalCookiesPerLocation(allLocations);
 });
+
 
 
 // I referred to ChatGPT a lot to troubleshoot and produce a majority of this code
