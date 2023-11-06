@@ -8,6 +8,11 @@ h1 {
   padding: 1em;
 }
 
+main {
+  background-color: snow;
+}
+
+
 nav {
   color: black;
   background-color: salmon;
