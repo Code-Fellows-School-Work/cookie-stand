@@ -10,6 +10,10 @@ h1 {
 
 main {
   background-color: snow;
+  display: flex;
+  flex-direction: column;
+  justify-content: center; /* Center vertically */
+  align-items: center;     /* Center horizontally */
 }
 
 
@@ -25,30 +29,6 @@ header nav li {
   margin-left: 50px;
 }
 
-/* .inline-paragraph {
-  display: inline;
-  padding: 1em;
-}
-
-.centered-image {
-  text-align: center;
-}
-
-.centered-image img {
-  max-width: 100%;
-  display: inline-block;
-}
-
-.google-font {
-  font-family: 'Righteous', sans-serif;
-  font-size: 1.5em;
-} */
-
-main ul li {
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  margin-left: 75px;
-}
-
 #city-name {
   font-family: 'Righteous', sans-serif;
 }
@@ -57,14 +37,7 @@ footer {
   background-color: gray;
   text-align: center;
   padding: 2em;
-}
-
-section #results-city1 {
-  margin-left: 20px;
-}
-
-main h2 {
-  margin-left: 50px;
+  margin-top: 2em;
 }
 
 table * {
@@ -85,3 +58,19 @@ table {
   text-align: center; /* Reset the text alignment if needed */
 }
 
+main p {
+  font-size: 1.25em;
+  padding: 1em;
+  text-align: center;
+}
+
+#content-container {
+  display: flex;
+  justify-content: space-between;
+  text-align: center;
+  padding: 1em;
+}
+
+label {
+  font-size: 1.1em
+}
